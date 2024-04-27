@@ -5,21 +5,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MenuController {
+public class ItemController {
 
-    private final MenuRepository menuRepository;
+    private final ItemRepository menuRepository;
 
-    MenuController(MenuRepository menuRepository) {
+    ItemController(ItemRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 
     @GetMapping("/api/menu/items")
-    public Iterable<MenuItem> items() {
+    public Iterable<Item> items() {
         return this.menuRepository.findAll();
     }
 
     @GetMapping("/api/menu/items/{name}")
-    public Iterable<MenuItem> menuItemsByName(@PathVariable String name) {
+    public Iterable<Item> menuItemsByName(@PathVariable String name) {
         return this.menuRepository.findByName(capitalize(name));
     }    
 

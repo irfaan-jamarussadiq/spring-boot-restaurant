@@ -4,34 +4,40 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "menu_item")
-class MenuItem {
+class Item implements Serializable {
     private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id;
     private String name; 
-    private String image;
     private String description;
+    private BigDecimal unitPrice;
+    private String image;    
 
     @SuppressWarnings("unused")
-    private MenuItem() {}
+    private Item() {}
 
-    public MenuItem(String name, String image, String description) {
+    public Item(String name, String description, BigDecimal unitPrice, String image) {
         this.name = name;
-        this.image = image;
         this.description = description;
+        this.unitPrice = unitPrice;
+        this.image = image;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getImage() {
-        return image;
-    }        
-
     public String getDescription() {
         return description;
-    }    
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+    
+    public String getImage() {
+        return image;
+    }            
 }
