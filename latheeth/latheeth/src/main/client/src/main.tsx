@@ -7,7 +7,6 @@ import Menu from "./menu/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 import NotFound from "./NotFound.tsx";
 import Orders from "./order/Orders.tsx";
-import OrderItem from "./order/OrderItem.tsx";
 import OrderCheckout from "./order/OrderCheckout.tsx";
 
 const router = createBrowserRouter([
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: <Orders />,
-  },
-  {
-    path: "/order/*",
-    element: <OrderItem />,
   },
   {
     path: "/checkout",
