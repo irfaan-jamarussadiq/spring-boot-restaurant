@@ -1,3 +1,5 @@
+import "./NavBar.css";
+
 type Link = {
     path: string,
     name: string,
