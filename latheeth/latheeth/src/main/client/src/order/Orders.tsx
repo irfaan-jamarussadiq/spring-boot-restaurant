@@ -38,10 +38,18 @@ function Orders() {
     }
 
     useEffect(() => {
+        let ignore = false;
+
         fetch("http://localhost:8080/api/menu/orders")
             .then(response => response.json())
-            .then(json => setOrders(json))
-            .catch(error => setError(error))
+            .then(json => {
+                if (!ignore) setOrders(json)
+            })
+            .catch(error => setError(error));
+        
+        return () => { 
+            ignore = false;
+        };
     }, []);
 
     return (
