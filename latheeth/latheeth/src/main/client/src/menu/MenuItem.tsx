@@ -1,7 +1,8 @@
 export type Item = {
     name: string,
-    image: string,
     description: string,
+    unitPrice: number,
+    image: string,
 };
 
 type Props = {

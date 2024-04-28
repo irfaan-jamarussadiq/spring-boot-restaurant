@@ -1,36 +1,31 @@
-import { useEffect, useState } from 'react';
 import './Menu.css';
 import MenuItem, { Item } from './MenuItem';
-
-async function fetchMenu() {
-    const response = await fetch("http://localhost:8080/api/menu/items");
-    return response.json();
-}
+import { useState, useEffect } from 'react';
 
 function Menu() {
+    const [error, setError] = useState(null);
     const [menu, setMenu] = useState<Array<Item>>([]);
-    
+
     useEffect(() => {
         let ignore = false;
-        async function startFetching() {
-            const menuJSON = await fetchMenu();
-            if (!ignore) {
-                setMenu(menuJSON);
-            }
-        }
 
-        startFetching();
-
-        return () => { 
-            ignore = true; 
+        fetch("http://localhost:8080/api/menu/items")
+            .then(response => response.json())
+            .then(json => { 
+                if (!ignore) setMenu(json) 
+            })
+            .catch(error => setError(error));
+        
+        return () => {
+            ignore = true;
         };
-    }, [menu]);
+    }, []);
 
     return (
-        <div>
-            <h1>Menu</h1>
+        <div className="Menu page">
+            <h1 className="page-title">Menu</h1>
             <div className="menu-items">    
-                {menu.map(menuItem => <MenuItem key={menuItem.name} item={menuItem} />)}
+                {error ? <p>Could not find menu items</p> : menu.map((item) => <MenuItem key={item.name} item={item} />)}
             </div>
         </div>
     );
