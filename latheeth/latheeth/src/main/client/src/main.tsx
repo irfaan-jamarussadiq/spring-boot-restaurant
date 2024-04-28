@@ -1,23 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import App from './App.tsx';
-import Menu from './menu/Menu.tsx';
-import NavBar from './NavBar.tsx';
-import NotFound from './NotFound.tsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import App from "./App.tsx";
+import Menu from "./menu/Menu.tsx";
+import NavBar from "./NavBar.tsx";
+import NotFound from "./NotFound.tsx";
+import Orders from "./order/Orders.tsx";
+import OrderItem from "./order/OrderItem.tsx";
+import OrderCheckout from "./order/OrderCheckout.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
   },
   {
-    path: '/menu',
+    path: "/menu",
     element: <Menu />,
   },  
   {
-    path: '*',
+    path: "/order",
+    element: <Orders />,
+  },
+  {
+    path: "/order/*",
+    element: <OrderItem />,
+  },
+  {
+    path: "/checkout",
+    element: <OrderCheckout />,
+  },  
+  {
+    path: "*",
     element: <NotFound />,
   }
 ]);
@@ -41,7 +56,7 @@ const links = [
   },
 ];
  
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <NavBar links={links} />
     <RouterProvider router={router} />
