@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "vite-plugin-svgr": "^3.3.0",
+    "vite-svg-loader": "^5.1.0"
+  }
+}
