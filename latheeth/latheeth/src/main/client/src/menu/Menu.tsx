@@ -1,25 +1,9 @@
 import './Menu.css';
-import MenuItem, { Item } from './MenuItem';
-import { useState, useEffect } from 'react';
+import MenuItem from './MenuItem';
+import useFetchMenu from './useFetchMenu';
 
 function Menu() {
-    const [error, setError] = useState(null);
-    const [menu, setMenu] = useState<Array<Item>>([]);
-
-    useEffect(() => {
-        let ignore = false;
-
-        fetch("http://localhost:8080/api/menu/items")
-            .then(response => response.json())
-            .then(json => { 
-                if (!ignore) setMenu(json) 
-            })
-            .catch(error => setError(error));
-        
-        return () => {
-            ignore = true;
-        };
-    }, []);
+    const { menu, error } = useFetchMenu();
 
     return (
         <div className="Menu page">
