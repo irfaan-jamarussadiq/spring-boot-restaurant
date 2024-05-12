@@ -2,6 +2,7 @@ package com.restaurant.latheeth;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +13,8 @@ import jakarta.persistence.OneToOne;
 @Entity
 class OrderItem implements Serializable {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-    @OneToOne
+
+    @OneToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name="item_id")
     private Item item;
     private int count;
@@ -31,5 +33,9 @@ class OrderItem implements Serializable {
 
     public int getCount() {
         return count;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
